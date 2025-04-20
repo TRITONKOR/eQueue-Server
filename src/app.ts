@@ -2,6 +2,7 @@ import fastifyRequestContext from "@fastify/request-context";
 import fastifyRequestLogger from "@mgcrea/fastify-request-logger";
 import Fastify, { FastifyInstance } from "fastify";
 
+import routes from "./api/routes";
 import { config } from "./config/config";
 
 const bootstrapFastify = (): FastifyInstance => {
@@ -38,6 +39,8 @@ const bootstrapFastify = (): FastifyInstance => {
             sessionData: {},
         },
     });
+
+    fastify.register(routes, { prefix: "/api" });
 
     return fastify;
 };
