@@ -1,3 +1,4 @@
+import cors from "@fastify/cors";
 import fastifyRequestContext from "@fastify/request-context";
 import fastifyRequestLogger from "@mgcrea/fastify-request-logger";
 import Fastify, { FastifyInstance } from "fastify";
@@ -41,6 +42,12 @@ const bootstrapFastify = (): FastifyInstance => {
     });
 
     fastify.register(routes, { prefix: "/api" });
+
+    fastify.register(cors, {
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+    });
 
     return fastify;
 };
